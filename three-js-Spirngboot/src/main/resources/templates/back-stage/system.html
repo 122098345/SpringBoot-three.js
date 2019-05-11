@@ -1,0 +1,130 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>后台管理</title>
+<link rel="stylesheet" type="text/css" href="css/common.css" />
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script type="text/javascript" src="js/libs/modernizr.min.js"></script>
+</head>
+<body>
+	<div class="topbar-wrap white">
+		<div class="topbar-inner clearfix">
+			<div class="topbar-logo-wrap clearfix">
+				<h1 class="topbar-logo none">
+					<a href="system" class="navbar-brand">后台管理</a>
+				</h1>
+				<ul class="navbar-list clearfix">
+					<li><a class="on" th:href="@{system}">首页</a></li>
+					<li><a th:href="@{index}" target="_blank">网站首页</a></li>
+				</ul>
+			</div>
+			<div class="top-info-wrap">
+				<ul class="top-info-list clearfix">
+					<li
+						th:text="'欢迎：' + ${#request.session.getAttribute('admin_name')}"></li>
+					<li>&nbsp;&nbsp;</li>
+					<li><a href="/bs-logout">退出</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="container clearfix">
+		<div class="sidebar-wrap">
+			<div class="sidebar-title">
+				<h1>菜单</h1>
+			</div>
+			<div class="sidebar-content">
+				<ul class="sidebar-list">
+					<li><a href="#"><i class="icon-font">&#xe003;</i>常用操作</a>
+						<ul class="sub-menu">
+							<li><a th:href="@{title}"><i class="icon-font">&#xe005;</i><i>标题管理</i></a></li>
+							<li><a th:href="@{classify}"><i class="icon-font">&#xe052;</i><i>分类管理</i></a></li>
+							<li><a th:href="@{user}"> <i class="icon-font">&#xe008;</i><i>用户管理</i></a></li>
+							<li><a th:href="@{model}"><i class="icon-font">&#xe006;</i><i>作品管理</i></a></li>
+							<li><a th:href="@{system}"><i class="icon-font">&#xe018;</i><i>系统设置</i></a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+		<!--/sidebar-->
+		<div class="main-wrap">
+			<div class="crumb-wrap">
+				<div class="crumb-list">
+					<i class="icon-font"></i><a href="system">首页</a><span
+						class="crumb-step">&gt;</span><span class="crumb-name">系统设置</span>
+				</div>
+			</div>
+			<div class="result-wrap">
+				<form action="#" method="post" id="myform" name="myform">
+					<div class="config-items">
+						<div class="config-title">
+							<h1>
+								<i class="icon-font">&#xe00a;</i>网站信息设置
+							</h1>
+						</div>
+						<div class="result-content">
+							<table width="100%" class="insert-tab">
+								<tbody>
+									<tr>
+										<th width="15%"><i class="require-red">*</i>域名：</th>
+										<td><p>http://localhost:8080</p>
+									</tr>
+									<tr>
+										<th><i class="require-red">*</i>站点标题：</th>
+										<td><p>ThreeJs</p></td>
+									</tr>
+									<tr>
+										<th><i class="require-red">*</i>关键字：</th>
+										<td>
+											<p>Three.js，在线建模，分享发布平台，数据格式转换</p>
+										</td>
+									</tr>
+									<tr>
+										<th><i class="require-red">*</i>描述：</th>
+										<td>
+											<p>3D设计资源和3D开发技术的专业网站！</p>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="config-items">
+						<div class="config-title">
+							<h1>
+								<i class="icon-font">&#xe014;</i>站长信息设置
+							</h1>
+						</div>
+						<div class="result-content">
+							<table width="100%" class="insert-tab">
+								<tr>
+									<th width="15%"><i class="require-red">*</i>网站联系邮箱：</th>
+									<td>1220983425@qq.com</td>
+								</tr>
+								<tr>
+									<th><i class="require-red">*</i>联系人：</th>
+									<td>55开</td>
+								</tr>
+								<tr>
+									<th><i class="require-red">*</i>联系电话：</th>
+									<td>18206774231</td>
+								</tr>
+								<tr>
+									<th><i class="require-red">*</i>备案ICP：</th>
+									<td>000-00-0000-200-00</td>
+								</tr>
+								<tr>
+									<th><i class="require-red">*</i>地址：</th>
+									<td>中国 • 云南</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!--/main-->
+	</div>
+</body>
+</html>

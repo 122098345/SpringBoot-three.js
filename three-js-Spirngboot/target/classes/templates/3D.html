@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<title>three.js / editor</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<!-- Origin Trial Token, feature = WebXR Device API (For Chrome M69+), origin = https://threejs.org, expires = 2019-03-06 -->
+	<meta http-equiv="origin-trial" data-feature="WebXR Device API (For Chrome M69+)" data-expires="2019-03-06"
+		content="AvDjbxYpoTgOL1PS0JEra7KFCehfTlKnXpU/ORSwNdCQ35cX70cTUkXOnQ26A5XJi3eXHSKpBPchdt5lbcxDuAIAAABTeyJvcmlnaW4iOiJodHRwczovL3RocmVlanMub3JnOjQ0MyIsImZlYXR1cmUiOiJXZWJYUkRldmljZU02OSIsImV4cGlyeSI6MTU1MTgzMDM5OX0=">
+	<link rel="manifest" href="manifest.json">
+</head>
+<script th:inline="javascript">
+	function loadModel() {
+
+
+	}
+</script>
+
+<body ontouchstart="" onload="loadModel();">
+	<link rel="stylesheet" href="css/tjmain.css">
+	<link rel="stylesheet" id="theme" href="css/light.css">
+	<script type="text/javascript" src="js/jquery.js"></script>
+
+	<script src="js/threejs/build/three.js"></script>
+	<script src="js/threejs/libs/system.min.js"></script>
+
+	<script src="js/threejs/controls/EditorControls.js"></script>
+	<script src="js/threejs/controls/TransformControls.js"></script>
+
+	<script src="js/threejs/libs/jszip.min.js"></script>
+	<script src="js/threejs/libs/inflate.min.js"></script> <!-- FBX -->
+
+	<script src="js/threejs/loaders/AMFLoader.js"></script>
+	<script src="js/threejs/loaders/AWDLoader.js"></script>
+	<script src="js/threejs/loaders/BabylonLoader.js"></script>
+	<script src="js/threejs/loaders/ColladaLoader.js"></script>
+	<script src="js/threejs/loaders/DRACOLoader.js"></script>
+	<script src="js/threejs/loaders/FBXLoader.js"></script>
+	<script src="js/threejs/loaders/GLTFLoader.js"></script>
+	<script src="js/threejs/loaders/deprecated/LegacyGLTFLoader.js"></script>
+	<script src="js/threejs/loaders/KMZLoader.js"></script>
+	<script src="js/threejs/loaders/MD2Loader.js"></script>
+	<script src="js/threejs/loaders/OBJLoader.js"></script>
+	<script src="js/threejs/loaders/MTLLoader.js"></script>
+	<script src="js/threejs/loaders/PlayCanvasLoader.js"></script>
+	<script src="js/threejs/loaders/PLYLoader.js"></script>
+	<script src="js/threejs/loaders/STLLoader.js"></script>
+	<script src="js/threejs/loaders/SVGLoader.js"></script>
+	<script src="js/threejs/loaders/TGALoader.js"></script>
+	<script src="js/threejs/loaders/TDSLoader.js"></script>
+	<script src="js/threejs/loaders/VRMLLoader.js"></script>
+	<script src="js/threejs/loaders/ctm/lzma.js"></script>
+	<script src="js/threejs/loaders/ctm/ctm.js"></script>
+	<script src="js/threejs/loaders/ctm/CTMLoader.js"></script>
+
+	<script src="js/threejs/exporters/ColladaExporter.js"></script>
+	<script src="js/threejs/exporters/GLTFExporter.js"></script>
+	<script src="js/threejs/exporters/OBJExporter.js"></script>
+	<script src="js/threejs/exporters/STLExporter.js"></script>
+
+	<script src="js/threejs/renderers/Projector.js"></script>
+	<script src="js/threejs/renderers/RaytracingRenderer.js"></script>
+	<script src="js/threejs/renderers/SoftwareRenderer.js"></script>
+	<script src="js/threejs/renderers/SVGRenderer.js"></script>
+
+	<link rel="stylesheet" href="js/threejs/libs/codemirror/codemirror.css">
+	<link rel="stylesheet" href="js/threejs/libs/codemirror/theme/monokai.css">
+	<script src="js/threejs/libs/codemirror/codemirror.js"></script>
+	<script src="js/threejs/libs/codemirror/mode/javascript.js"></script>
+	<script src="js/threejs/libs/codemirror/mode/glsl.js"></script>
+
+	<script src="js/threejs/libs/esprima.js"></script>
+	<script src="js/threejs/libs/jsonlint.js"></script>
+	<script src="js/threejs/libs/glslprep.min.js"></script>
+
+	<link rel="stylesheet" href="js/threejs/libs/codemirror/addon/dialog.css">
+	<link rel="stylesheet" href="js/threejs/libs/codemirror/addon/show-hint.css">
+	<link rel="stylesheet" href="js/threejs/libs/codemirror/addon/tern.css">
+	<script src="js/threejs/libs/codemirror/addon/dialog.js"></script>
+	<script src="js/threejs/libs/codemirror/addon/show-hint.js"></script>
+	<script src="js/threejs/libs/codemirror/addon/tern.js"></script>
+	<script src="js/threejs/libs/acorn/acorn.js"></script>
+	<script src="js/threejs/libs/acorn/acorn_loose.js"></script>
+	<script src="js/threejs/libs/acorn/walk.js"></script>
+	<script src="js/threejs/libs/ternjs/polyfill.js"></script>
+	<script src="js/threejs/libs/ternjs/signal.js"></script>
+	<script src="js/threejs/libs/ternjs/tern.js"></script>
+	<script src="js/threejs/libs/ternjs/def.js"></script>
+	<script src="js/threejs/libs/ternjs/comment.js"></script>
+	<script src="js/threejs/libs/ternjs/infer.js"></script>
+	<script src="js/threejs/libs/ternjs/doc_comment.js"></script>
+	<script src="js/threejs/libs/tern-threejs/threejs.js"></script>
+
+	<script src="js/threejs/libs/signals.min.js"></script>
+	<script src="js/threejs/libs/ui.js"></script>
+	<script src="js/threejs/libs/ui.three.js"></script>
+
+	<script src="js/threejs/libs/html2canvas.js"></script>
+	<script src="js/threejs/libs/three.html.js"></script>
+
+	<script src="js/threejs/libs/app.js"></script>
+	<script src="js/threejs/Player.js"></script>
+	<script src="js/threejs/Script.js"></script>
+
+	<script src="js/threejs/vr/WebVR.js"></script>
+	threejs/
+	<script src="js/threejs/Storage.js"></script>
+	threejs/
+	<script src="js/threejs/Editor.js"></script>
+	<script src="js/threejs/Config.js"></script>
+	<script src="js/threejs/History.js"></script>
+	<script src="js/threejs/Loader.js"></script>
+	<script src="js/threejs/Menubar.js"></script>
+	<script src="js/threejs/Menubar.File.js"></script>
+	<script src="js/threejs/Menubar.Edit.js"></script>
+	<script src="js/threejs/Menubar.Add.js"></script>
+	<script src="js/threejs/Menubar.Play.js"></script>
+	<!-- <script src="js/Menubar.View.js"></script> -->
+	<script src="js/threejs/Menubar.Examples.js"></script>
+	<script src="js/threejs/Menubar.Help.js"></script>
+	<script src="js/threejs/Menubar.Status.js"></script>
+	<script src="js/threejs/Sidebar.js"></script>
+	<script src="js/threejs/Sidebar.Scene.js"></script>
+	<script src="js/threejs/Sidebar.Project.js"></script>
+	<script src="js/threejs/Sidebar.Settings.js"></script>
+	<script src="js/threejs/Sidebar.Settings.Shortcuts.js"></script>
+	<script src="js/threejs/Sidebar.Settings.Viewport.js"></script>
+	<script src="js/threejs/Sidebar.Properties.js"></script>
+	<script src="js/threejs/Sidebar.Object.js"></script>
+	<script src="js/threejs/Sidebar.Geometry.js"></script>
+	<script src="js/threejs/Sidebar.Geometry.Geometry.js"></script>
+	<script src="js/threejs/Sidebar.Geometry.BufferGeometry.js"></script>
+	<script src="js/threejs/Sidebar.Geometry.Modifiers.js"></script>
+	<script src="js/threejs/Sidebar.Geometry.BoxGeometry.js"></script>
+	<script src="js/threejs/Sidebar.Geometry.CircleGeometry.js"></script>
+	<script src="js/threejs/Sidebar.Geometry.CylinderGeometry.js"></script>
+	<script src="js/threejs/Sidebar.Geometry.IcosahedronGeometry.js"></script>
+	<script src="js/threejs/Sidebar.Geometry.PlaneGeometry.js"></script>
+	<script src="js/threejs/Sidebar.Geometry.SphereGeometry.js"></script>
+	<script src="js/threejs/Sidebar.Geometry.TorusGeometry.js"></script>
+	<script src="js/threejs/Sidebar.Geometry.TorusKnotGeometry.js"></script>
+	<script src="js/threejs/Sidebar.Geometry.TubeGeometry.js"></script>
+	<script src="js/threejs/geometries/TeapotBufferGeometry.js"></script>
+	<script src="js/threejs/Sidebar.Geometry.TeapotBufferGeometry.js"></script>
+	<script src="js/threejs/Sidebar.Geometry.LatheGeometry.js"></script>
+	<script src="js/threejs/Sidebar.Material.js"></script>
+	<script src="js/threejs/Sidebar.Animation.js"></script>
+	<script src="js/threejs/Sidebar.Script.js"></script>
+	<script src="js/threejs/Sidebar.History.js"></script>
+	<script src="js/threejs/Strings.js"></script>
+	<script src="js/threejs/Toolbar.js"></script>
+	<script src="js/threejs/Viewport.js"></script>
+	<script src="js/threejs/Viewport.Camera.js"></script>
+	<script src="js/threejs/Viewport.Info.js"></script>
+
+	<script src="js/threejs/Command.js"></script>
+	<script src="js/threejs/commands/AddObjectCommand.js"></script>
+	<script src="js/threejs/commands/RemoveObjectCommand.js"></script>
+	<script src="js/threejs/commands/MoveObjectCommand.js"></script>
+	<script src="js/threejs/commands/SetPositionCommand.js"></script>
+	<script src="js/threejs/commands/SetRotationCommand.js"></script>
+	<script src="js/threejs/commands/SetScaleCommand.js"></script>
+	<script src="js/threejs/commands/SetValueCommand.js"></script>
+	<script src="js/threejs/commands/SetUuidCommand.js"></script>
+	<script src="js/threejs/commands/SetColorCommand.js"></script>
+	<script src="js/threejs/commands/SetGeometryCommand.js"></script>
+	<script src="js/threejs/commands/SetGeometryValueCommand.js"></script>
+	<script src="js/threejs/commands/MultiCmdsCommand.js"></script>
+	<script src="js/threejs/commands/AddScriptCommand.js"></script>
+	<script src="js/threejs/commands/RemoveScriptCommand.js"></script>
+	<script src="js/threejs/commands/SetScriptValueCommand.js"></script>
+	<script src="js/threejs/commands/SetMaterialCommand.js"></script>
+	<script src="js/threejs/commands/SetMaterialValueCommand.js"></script>
+	<script src="js/threejs/commands/SetMaterialColorCommand.js"></script>
+	<script src="js/threejs/commands/SetMaterialMapCommand.js"></script>
+	<script src="js/threejs/commands/SetSceneCommand.js"></script>
+
+	<script th:inline="javascript">
+
+		window.URL = window.URL || window.webkitURL;
+		window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder;
+
+		Number.prototype.format = function () {
+			return this.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+		};
+
+		//
+
+		//
+
+		var editor = new Editor();
+
+		var viewport = new Viewport(editor);
+		document.body.appendChild(viewport.dom);
+
+		var toolbar = new Toolbar(editor);
+		document.body.appendChild(toolbar.dom);
+
+		var script = new Script(editor);
+		document.body.appendChild(script.dom);
+
+		var player = new Player(editor);
+		document.body.appendChild(player.dom);
+
+		var sidebar = new Sidebar(editor);
+		document.body.appendChild(sidebar.dom);
+
+		var menubar = new Menubar(editor);
+		document.body.appendChild(menubar.dom);
+
+		//
+
+		editor.setTheme(editor.config.getKey('theme'));
+
+
+		editor.storage.init(function () {
+
+			editor.storage.get(function (state) {
+
+				if (isLoadingFromHash) return;
+
+				if (state !== undefined) {
+
+					editor.fromJSON(state);
+
+				}
+
+				var selected = editor.config.getKey('selected');
+
+				if (selected !== undefined) {
+
+					editor.selectByUuid(selected);
+
+				}
+
+			});
+
+			//
+
+			var timeout;
+
+			function saveState(scene) {
+
+				if (editor.config.getKey('autosave') === false) {
+
+					return;
+
+				}
+
+				clearTimeout(timeout);
+
+				timeout = setTimeout(function () {
+
+					editor.signals.savingStarted.dispatch();
+
+					timeout = setTimeout(function () {
+
+						editor.storage.set(editor.toJSON());
+
+						editor.signals.savingFinished.dispatch();
+
+					}, 100);
+
+				}, 1000);
+
+			};
+
+			var signals = editor.signals;
+
+			signals.geometryChanged.add(saveState);
+			signals.objectAdded.add(saveState);
+			signals.objectChanged.add(saveState);
+			signals.objectRemoved.add(saveState);
+			signals.materialChanged.add(saveState);
+			signals.sceneBackgroundChanged.add(saveState);
+			signals.sceneFogChanged.add(saveState);
+			signals.sceneGraphChanged.add(saveState);
+			signals.scriptChanged.add(saveState);
+			signals.historyChanged.add(saveState);
+
+		});
+		//
+
+		var my3djson = [[${ mxjson }]];
+		
+		if (my3djson !== null) {
+			var loader = new THREE.ObjectLoader();
+			my3djson = JSON.parse(my3djson);
+			var result = loader.parse(my3djson);
+			editor.execute(new AddObjectCommand(result));
+		}
+
+		//
+
+		document.addEventListener('dragover', function (event) {
+
+			event.preventDefault();
+			event.dataTransfer.dropEffect = 'copy';
+
+		}, false);
+
+		document.addEventListener('drop', function (event) {
+
+			event.preventDefault();
+
+			editor.loader.loadFiles(event.dataTransfer.files);
+
+		}, false);
+
+		function onWindowResize(event) {
+
+			editor.signals.windowResize.dispatch();
+
+		}
+
+		window.addEventListener('resize', onWindowResize, false);
+
+		onWindowResize();
+
+		//
+
+		var isLoadingFromHash = false;
+		var hash = window.location.hash;
+
+		if (hash.substr(1, 5) === 'file=') {
+
+			var file = hash.substr(6);
+
+			if (confirm('任何未储存的数据将会丢失，是否确认？')) {
+
+				var loader = new THREE.FileLoader();
+				loader.crossOrigin = '';
+				loader.load(file, function (text) {
+
+					editor.clear();
+					editor.fromJSON(JSON.parse(text));
+
+				});
+
+				isLoadingFromHash = true;
+
+			}
+
+		}
+	</script>
+</body>
+
+</html>

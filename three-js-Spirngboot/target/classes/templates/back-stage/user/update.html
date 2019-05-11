@@ -1,0 +1,178 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>后台管理</title>
+<link rel="stylesheet" type="text/css" href="css/common.css" />
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script type="text/javascript" th:src="@{js/libs/modernizr.min.js}"></script>
+</head>
+<body>
+	<div class="topbar-wrap white">
+		<div class="topbar-wrap white">
+			<div class="topbar-inner clearfix">
+				<div class="topbar-logo-wrap clearfix">
+					<h1 class="topbar-logo none">
+						<a href="system" class="navbar-brand">后台管理</a>
+					</h1>
+					<ul class="navbar-list clearfix">
+						<li>
+							<a class="on" th:href="@{system}">首页</a>
+						</li>
+						<li>
+							<a th:href="@{index}" target="_blank">网站首页</a>
+						</li>
+					</ul>
+				</div>
+				<div class="top-info-wrap">
+					<ul class="top-info-list clearfix">
+						<li th:text="'欢迎：' + ${#request.session.getAttribute('admin_name')}"></li>
+						<li>&nbsp;&nbsp;</li>
+						<li>
+							<a href="/bs-logout">退出</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container clearfix">
+		<div class="sidebar-wrap">
+			<div class="sidebar-title">
+				<h1>菜单</h1>
+			</div>
+			<div class="sidebar-content">
+				<ul class="sidebar-list">
+					<li>
+						<a href="#">
+							<i class="icon-font">&#xe003;</i>
+							常用操作
+						</a>
+						<ul class="sub-menu">
+							<li>
+								<a th:href="@{title}">
+									<i class="icon-font">&#xe005;</i>
+									<i>标题管理</i>
+								</a>
+							</li>
+							<li>
+								<a th:href="@{classify}">
+									<i class="icon-font">&#xe052;</i>
+									<i>分类管理</i>
+								</a>
+							</li>
+							<li>
+								<a th:href="@{user}">
+									<i class="icon-font">&#xe008;</i>
+									<i>用户管理</i>
+								</a>
+							</li>
+							<li>
+								<a th:href="@{model}">
+									<i class="icon-font">&#xe006;</i>
+									<i>作品管理</i>
+								</a>
+							</li>
+							<li>
+								<a th:href="@{system}">
+									<i class="icon-font">&#xe018;</i>
+									<i>系统设置</i>
+								</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--/sidebar-->
+		<div class="main-wrap">
+
+			<div class="crumb-wrap">
+				<div class="crumb-list">
+					<i class="icon-font"></i>
+					<a th:href="@{system}">首页</a>
+					<span class="crumb-step">&gt;</span>
+					<a class="crumb-name" th:text="${user}" th:href="@{user}"></a>
+					<span class="crumb-step">&gt;</span>
+					<span>修改用户</span>
+				</div>
+			</div>
+			<div class="result-wrap">
+				<div class="result-content">
+					<form th:action="@{/user-updatesub(userId = ${List.yh_id},user = ${List.yh_username})}" method="post" id="myform" name="myform" enctype="multipart/form-data">
+						<table class="insert-tab" width="100%">
+							<tbody>
+								<tr>
+									<th>
+										<i class="require-red">*</i>
+										登录名：
+									</th>
+									<td>
+										<p th:text="${List.yh_username}" class="required"></p>
+									</td>
+
+								</tr>
+								<tr>
+									<th>
+										<i class="require-red">*</i>
+										昵称：
+									</th>
+									<td>
+										<input class="common-text required" id="nc" maxlength="7" name="nc" size="25" th:value="${List.yh_nc}" type="text">
+									</td>
+								</tr>
+								<tr>
+									<th>
+										<i class="require-red">*</i>
+										密码：
+									</th>
+									<td>
+										<input class="common-text required" id="title" maxlength="18" name="pass" size="25" th:value="${List.yh_password}" type="text">
+									</td>
+								</tr>
+								<tr>
+									<th>
+										<i class="require-red">*</i>
+										电话号码：
+									</th>
+									<td>
+										<input class="common-text" name="phone" size="25" maxlength="11" type="text" th:value="${List.yh_phone}">
+									</td>
+								</tr>
+								<tr>
+									<th>
+										<i class="require-red">*</i>
+										邮箱 ：
+									</th>
+									<td>
+										<input class="common-text" name="email" size="25" type="text" th:value="${List.yh_email}">
+									</td>
+								</tr>
+								<tr>
+									<th>
+										<i class="require-red">*</i>
+										注册时间 ：
+									</th>
+									<td>
+										<input class="common-text" name="date" size="25" type="text" th:value="${List.yh_zcdate}">
+									</td>
+								</tr>
+
+								<tr>
+									<th></th>
+									<td>
+										<input class="btn btn-primary btn6 mr10" value="修改" type="submit">
+										<input class="btn btn6" onclick="history.go(-1)" value="返回" type="button">
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</form>
+				</div>
+			</div>
+
+		</div>
+		<!--/main-->
+	</div>
+</body>
+</html>

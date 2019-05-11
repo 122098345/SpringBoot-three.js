@@ -1,0 +1,5 @@
+cn\edu\ynnu\model\AdminUser.class
+MainApp.class
+cn\edu\ynnu\DAO\LoginRepository.class
+cn\edu\ynnu\Controller\IndexController.class
+cn\edu\ynnu\Controller\LoginController.class

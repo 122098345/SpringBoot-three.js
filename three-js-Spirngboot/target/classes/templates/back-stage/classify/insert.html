@@ -1,0 +1,138 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>后台管理</title>
+<link rel="stylesheet" type="text/css" href="css/common.css" />
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script type="text/javascript" th:src="@{js/libs/modernizr.min.js}"></script>
+</head>
+<body>
+	<div class="topbar-wrap white">
+		<div class="topbar-wrap white">
+			<div class="topbar-inner clearfix">
+				<div class="topbar-logo-wrap clearfix">
+					<h1 class="topbar-logo none">
+						<a href="system" class="navbar-brand">后台管理</a>
+					</h1>
+					<ul class="navbar-list clearfix">
+						<li>
+							<a class="on" th:href="@{system}">首页</a>
+						</li>
+						<li>
+							<a th:href="@{index}" target="_blank">网站首页</a>
+						</li>
+					</ul>
+				</div>
+				<div class="top-info-wrap">
+					<ul class="top-info-list clearfix">
+						<li th:text="'欢迎：' + ${#request.session.getAttribute('admin_name')}"></li>
+						<li>&nbsp;&nbsp;</li>
+						<li>
+							<a href="/bs-logout">退出</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container clearfix">
+		<div class="sidebar-wrap">
+			<div class="sidebar-title">
+				<h1>菜单</h1>
+			</div>
+			<div class="sidebar-content">
+				<ul class="sidebar-list">
+					<li>
+						<a href="#">
+							<i class="icon-font">&#xe003;</i>
+							常用操作
+						</a>
+						<ul class="sub-menu">
+							<li>
+								<a th:href="@{title}">
+									<i class="icon-font">&#xe005;</i>
+									<i>标题管理</i>
+								</a>
+							</li>
+							<li>
+								<a th:href="@{classify}">
+									<i class="icon-font">&#xe052;</i>
+									<i>分类管理</i>
+								</a>
+							</li>
+							<li>
+								<a th:href="@{user}">
+									<i class="icon-font">&#xe008;</i>
+									<i>用户管理</i>
+								</a>
+							</li>
+							<li>
+								<a th:href="@{model}">
+									<i class="icon-font">&#xe006;</i>
+									<i>作品管理</i>
+								</a>
+							</li>
+							<li>
+								<a th:href="@{system}">
+									<i class="icon-font">&#xe018;</i>
+									<i>系统设置</i>
+								</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--/sidebar-->
+		<div class="main-wrap">
+
+			<div class="crumb-wrap">
+				<div class="crumb-list">
+					<i class="icon-font"></i>
+					<a th:href="@{system}">首页</a>
+					<span class="crumb-step">&gt;</span>
+					<a class="crumb-name" th:href="@{classify}">分类管理</a>
+					<span class="crumb-step">&gt;</span>
+					<span>新增分类</span>
+				</div>
+			</div>
+			<div class="result-wrap">
+				<div class="result-content">
+					<form th:action="@{fl-submit}" method="post" id="myform" name="myform" enctype="multipart/form-data">
+						<table class="insert-tab" width="100%">
+							<tbody>
+								<tr>
+									<th>
+										<i class="require-red">*</i>
+										分类名称：
+									</th>
+									<td>
+										<input class="common-text required" id="title" name="mc" size="50" value="" type="text">
+									</td>
+								</tr>
+
+								<tr>
+									<th>分类描述：</th>
+									<td>
+										<textarea name="nr" class="common-textarea" cols="30" style="width: 40%;" rows="5"></textarea>
+									</td>
+								</tr>
+								<tr>
+									<th></th>
+									<td>
+										<input class="btn btn-primary btn6 mr10" value="新增" type="submit">
+										<input class="btn btn6" onclick="history.go(-1)" value="返回" type="button">
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</form>
+				</div>
+			</div>
+
+		</div>
+		<!--/main-->
+	</div>
+</body>
+</html>

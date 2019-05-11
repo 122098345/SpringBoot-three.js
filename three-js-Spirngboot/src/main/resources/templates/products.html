@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>作品集</title>
+<!-- Custom Theme files -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<!-- //Custom Theme files -->
+<link href="css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+<link href="css/product.css" type="text/css" rel="stylesheet" media="all">
+<link href="css/form.css" rel="stylesheet" type="text/css" media="all" />
+<!-- js -->
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
+
+<script th:inline="javascript">
+function signin(){
+	var flag;
+	var username = [[${#request.session.getAttribute('state')}]];
+	if(username=="2"){
+		alert("用户名或密码错误");
+	}	else if(username=="3"){
+		alert("用户名或密码不能为空");
+	}else{
+	}
+}
+function t(){
+	var state = [[${#request.session.getAttribute('state')}]];
+	if(state==1){
+		window.location.href = "/3D";
+	}else{
+		alert("请登录后尝试！");
+	}
+}
+
+function m(){
+	var yhid = [[${#request.session.getAttribute('yh_id')}]];
+	if(yhid == null){
+		alert("请登录后访问！");
+	}else{
+		window.location.href = "/mymodel";
+	}
+}
+</script>
+</head>
+<body>
+	<!--header-->
+	<div class="header">
+		<div class="container">
+			<!--包含多个类-->
+			<nav class="navbar navbar-default">
+				<!--navbar-hearder before:display:table（块级表格） contenet：" "（包含元素空）-->
+				<div class="navbar-header">
+					<h1 class="navbar-brand">
+						<a href="index">Three-Model</a>
+					</h1>
+				</div>
+				<!--navbar-header-->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li>
+							<a href="index" th:text="${TitleList.get(0).t_title}"></a>
+						</li>
+						<li>
+							<a href="products" th:text="${TitleList.get(1).t_title}"></a>
+						</li>
+						<li>
+							<a href="javascript:void(0)" onclick="m();" th:text="${TitleList.get(2).t_title}"></a>
+						</li>
+					</ul>
+					<!--/.navbar-collapse-->
+				</div>
+				<!--//navbar-header-->
+			</nav>
+			<div class="header-info">
+				<div class="header-right login">
+					<a href="#">
+						<span class="glyphicon glyphicon-user" aria-hidden="true" th:if="${#request.session.getAttribute('state')} != 1"></span>
+						<span class="glyphicon" aria-hidden="true" th:if="${#request.session.getAttribute('state')} == 1" th:text="${#request.session.getAttribute('yh_nc')}"></span>
+					</a>
+					<div id="loginBox" th:if="${#request.session.getAttribute('state')} != 1">
+						<form id="loginForm" th:action="@{sign-in}" th:method="post">
+							<fieldset id="body">
+								<fieldset>
+									<label for="username">用户名：</label>
+									<input type="text" name="username" id="username">
+								</fieldset>
+								<fieldset>
+									<label for="password">密 码：</label>
+									<input type="password" name="password" id="password">
+								</fieldset>
+								<input type="submit" id="login" value="登 录">
+							</fieldset>
+							<p>
+								新用户
+								<a class="sign" href="account">注 册</a>
+								<span>
+									<a href="#">忘记密码？</a>
+								</span>
+							</p>
+						</form>
+					</div>
+				</div>
+				<div class="header-right cart">
+					<a href="#">
+						<span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+					</a>
+					<div class="cart-box">
+						<p>
+							<a href="signout" class="simpleCart_empty">退出登录</a>
+						</p>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<!--//header-->
+	<!--products-->
+	<div class="products">
+		<div class="container">
+			<div class="col-md-9 product-model-sec">
+				<div class="product-grid" th:each="MxList:${MxList}">
+					<div class="product-img product-info-cust prt_name">
+						<img src="images/timg.png" class="img-responsive" alt="">
+						<div class="ofr">
+							<p class="pric1">标题：</p>
+							<span class="item_price" th:text="${MxList.mx_bt}"></span>
+						</div>
+						<div class="ofr">
+							<p class="pric1">作者：</p>
+							<span class="item_price" th:text="${MxList.mx_yhm}"></span>
+						</div>
+						<div class="ofr">
+							<p class="pric1">分类：</p>
+							<span class="item_price" th:text="${MxList.mx_fl}"></span>
+						</div>
+						<div class="ofr">
+							<p class="pric1">时间：</p>
+							<p class="pric1" th:text="${MxList.mx_date}"></p>
+						</div>
+
+						<a class="item_add" th:href="@{/ck3D(id = ${MxList.mx_id})}"> 查看</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 rsidebar span_1_of_left">
+				<section class="sky-form">
+					<div class="product_right">
+						<h4 class="m_2">
+							<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+							分类
+						</h4>
+						<div class="tab1">
+							<ul class="place clearfix" th:each="list:${FlList}">
+
+								<li class="sort">
+									<a th:text="${list.flmc}" th:href="@{/products-fl(fl = ${list.flmc})}" style="color: #555555"></a>
+								</li>
+								<li class="by"></li>
+							</ul>
+						</div>
+
+					</div>
+				</section>
+				<section class="sky-form">
+					<h4>
+						<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+						发现
+					</h4>
+					<div class="row row1 scroll-pane">
+						<div class="col col-4">
+							<label class="checkbox">
+								<input type="checkbox" name="checkbox" checked="">
+								<i></i>
+								最新作品(20)
+							</label>
+						</div>
+						<div class="col col-4">
+							<label class="checkbox">
+								<input type="checkbox" name="checkbox">
+								<i></i>
+								热门下载(15)
+							</label>
+							<label class="checkbox">
+								<input type="checkbox" name="checkbox">
+								<i></i>
+								优秀作品(20)
+							</label>
+							<label class="checkbox">
+								<input type="checkbox" name="checkbox">
+								<i></i>
+								其他分类(50)
+							</label>
+						</div>
+					</div>
+				</section>
+				<!---->
+				<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+				<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+
+				<section class="sky-form">
+					<h4>
+						<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+						今年作品
+					</h4>
+					<div class="row row1 scroll-pane">
+						<div class="col col-4">
+							<label class="checkbox">
+								<input type="checkbox" name="checkbox">
+								<i></i>
+								2018年1月
+							</label>
+							<label class="checkbox">
+								<input type="checkbox" name="checkbox">
+								<i></i>
+								2018年2月
+							</label>
+							<label class="checkbox">
+								<input type="checkbox" name="checkbox">
+								<i></i>
+								2018年3月
+							</label>
+							<label class="checkbox">
+								<input type="checkbox" name="checkbox">
+								<i></i>
+								2018年4月
+							</label>
+							<label class="checkbox">
+								<input type="checkbox" name="checkbox">
+								<i></i>
+								2018年5月
+							</label>
+							<label class="checkbox">
+								<input type="checkbox" name="checkbox">
+								<i></i>
+								2018年6月
+							</label>
+							<label class="checkbox">
+								<input type="checkbox" name="checkbox">
+								<i></i>
+								2018年7月
+							</label>
+							<label class="checkbox">
+								<input type="checkbox" name="checkbox">
+								<i></i>
+								2018年8月
+							</label>
+
+						</div>
+					</div>
+				</section>
+				<section class="sky-form">
+					<h4>
+						<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+						设计师
+					</h4>
+					<div class="row row1 scroll-pane">
+						<div class="col col-4">
+							<label class="checkbox">
+								<input type="checkbox" name="checkbox" checked="">
+								<i></i>
+								Walker
+							</label>
+						</div>
+						<div class="col col-4">
+							<label class="checkbox">
+								<input type="checkbox" name="checkbox">
+								<i></i>
+								Nick
+							</label>
+							<label class="checkbox">
+								<input type="checkbox" name="checkbox">
+								<i></i>
+								Iori
+							</label>
+							<label class="checkbox">
+								<input type="checkbox" name="checkbox">
+								<i></i>
+								Temi
+							</label>
+						</div>
+					</div>
+				</section>
+				<section class="sky-form">
+					<h4>
+						<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+						暂无
+					</h4>
+					<div class="row row1 scroll-pane">
+						<div class="col col-4">
+							<label class="checkbox">
+								<input type="checkbox" name="checkbox" checked="">
+								<i></i>
+								待定
+							</label>
+						</div>
+						<div class="col col-4">
+							<label class="checkbox">
+								<input type="checkbox" name="checkbox">
+								<i></i>
+								待定
+							</label>
+							<label class="checkbox">
+								<input type="checkbox" name="checkbox">
+								<i></i>
+								待定
+							</label>
+							<label class="checkbox">
+								<input type="checkbox" name="checkbox">
+								<i></i>
+								待定
+							</label>
+						</div>
+					</div>
+				</section>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<!--//products-->
+	<!--footer-->
+	<div class="footer">
+		<div class="container">
+			<div class="footer-grids">
+				<div class="col-md-2 footer-grid">
+					<h4>使用帮助</h4>
+					<ul>
+						<li>
+							<a href="https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene">
+								<span class="glyphicon glyphicon-duplicate"></span>
+								&ensp;three-js文档
+							</a>
+						</li>
+						<li>
+							<a href="https://threejs.org/">
+								<span class="glyphicon glyphicon-book"></span>
+								&ensp;three-js网站
+							</a>
+						</li>
+						<li>
+							<a href="https://threejs.org/examples/">
+								<span class="glyphicon glyphicon-bishop"></span>
+								&ensp;优秀模型
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<span class="glyphicon glyphicon-bell"></span>
+								&ensp;更多建议
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-2 footer-grid">
+					<h4>友情连接</h4>
+					<ul>
+						<li>
+							<a href="https://v3.bootcss.com/components/">
+								<span class="glyphicon glyphicon-picture"></span>
+								&ensp;本站图标
+							</a>
+						</li>
+						<li>
+							<span class="glyphicon glyphicon glyphicon-user"></span>
+							&ensp;招&ensp;租
+						</li>
+						<li>
+							<span class="glyphicon glyphicon glyphicon-user"></span>
+							&ensp;招&ensp;租
+						</li>
+						<li>
+							<span class="glyphicon glyphicon glyphicon-user"></span>
+							&ensp;招&ensp;租
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-2 footer-grid">
+					<h4>国内用户</h4>
+					<ul>
+						<li>
+							<span class="glyphicon glyphicon-phone"></span>
+							&ensp;86-99999
+						</li>
+						<li>
+							<span class="glyphicon glyphicon-home"></span>
+							&ensp;云南师范大学
+						</li>
+						<li>
+							<span class="glyphicon glyphicon glyphicon-qrcode"></span>
+							&ensp;微信二维码
+						</li>
+						<li>
+							<span class="glyphicon glyphicon glyphicon-envelope"></span>
+							&ensp;admin@three-js.com
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-3 footer-grid icons">
+					<h4>国际用户</h4>
+					<ul>
+						<li>
+							<img src="images/i1.png" alt="" />
+							测试Facebook
+						</li>
+						<li>
+							<img src="images/i2.png" alt="" />
+							测试Twitter
+						</li>
+						<li>
+							<img src="images/i3.png" alt="" />
+							测试Google—Plus
+						</li>
+						<li>
+							<img src="images/i4.png" alt="" />
+							测试微博
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	</div>
+	<!--//footer-->
+	<div class="footer-bottom">
+		<div class="container">
+			<p>
+				Copyright &copy; 2015.Company name All rights reserved.
+				<a target="_blank" href="#">陈刘明</a>
+			</p>
+		</div>
+	</div>
+</body>
+</html>
